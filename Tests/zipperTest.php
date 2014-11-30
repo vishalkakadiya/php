@@ -1,7 +1,5 @@
 <?php
 
-//============  Start of file Ziping function Code ===========================================================//
-
 //require_once "PHPUnit/Autoload.php";
 //require_once "zipper.php";
 
@@ -14,23 +12,28 @@ class zipperTest extends PHPUnit_Framework_TestCase {
 		$this->zipper = new zipper();
     }
 
-	public function testLoadZipFiles( $source = null ) {
+	public function testLoadZipFiles( $source = "../Tests" ) {
 
 		//$zipper = new zipper();
  
         // use assertEquals to ensure the greeting is what you
         //$expected = "Hello world!"; //$a;
-        $actual = $this->zipper->LoadZipFiles( $source );
+        $actual = $this->zipper->LoadZipFiles( $source = "../Tests" );
         //$this->assertEquals($actual, $actual);
 	}
 
-	public function testProcessZip( $foldercontent = null, $folder = null, $maxsize = 50000 ) {
+	public function testProcessZip( $foldercontent = null, $folder = "../Tests", $maxsize = 50000 ) {
 		//$zipper = new zipper();
  
         // use assertEquals to ensure the greeting is what you
         //$expected = "Hello world!"; // Array;
-        $actual = $this->zipper->ProcessZip( $foldercontent, $folder, $maxsize );
+        $actual = $this->zipper->ProcessZip($foldercontent, $folder, $maxsize);
         //$this->assertEquals($actual, $actual);
+
+		/*return array(
+			'splits' => count($split),
+			'foldername' => ''
+		);*/
 	}
 
 	public function testgetMemoryLimit() {
@@ -42,7 +45,7 @@ class zipperTest extends PHPUnit_Framework_TestCase {
         //$this->assertEquals( $actual, $actual );
 	}
 	
-	public function testremove_directory( $album_download_directory = null ) {
+	public function testremove_directory( $album_download_directory = "../Tests" ) {
 		//$zipper = new zipper();
  
         // use assertEquals to ensure the greeting is what you
@@ -51,7 +54,7 @@ class zipperTest extends PHPUnit_Framework_TestCase {
         //$this->assertEquals( $actual, $actual );
 	}
 
-	public function testmake_zip( $album_download_directory = null ) {
+	public function testmake_zip( $album_download_directory = "../Tests" ) {
 		//$zipper = new zipper();
  
         // use assertEquals to ensure the greeting is what you
@@ -61,12 +64,12 @@ class zipperTest extends PHPUnit_Framework_TestCase {
 	}
 
 
-	public function testget_zip( $album_download_directory = null ) {
+	public function testget_zip( $album_download_directory = "../Tests" ) {
 		//echo "make_git";
  
         // use assertEquals to ensure the greeting is what you
         //$expected = ""; // return $response;
-        $actual = $this->zipper->get_zip($album_download_directory);
+        $actual = $this->zipper->get_zip( $album_download_directory );
         //$this->assertEquals( $actual, $actual );
 	}
 
