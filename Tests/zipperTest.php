@@ -2,8 +2,8 @@
 
 //============  Start of file Ziping function Code ===========================================================//
 
-require_once "PHPUnit/Autoload.php";
-require_once "zipper.php";
+//require_once "PHPUnit/Autoload.php";
+//require_once "zipper.php";
 
 
 class zipperTest extends PHPUnit_Framework_TestCase {
