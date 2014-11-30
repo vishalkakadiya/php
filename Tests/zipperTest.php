@@ -14,7 +14,7 @@ class zipperTest extends PHPUnit_Framework_TestCase {
 		$this->zipper = new zipper();
     }
 
-	public function testLoadZipFiles($source) {
+	public function testLoadZipFiles($source = "../Tests") {
 
 		//$zipper = new zipper();
  
@@ -24,7 +24,7 @@ class zipperTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals($actual, $actual);
 	}
 
-	public function testProcessZip($foldercontent, $folder, $maxsize) {
+	public function testProcessZip($foldercontent = null, $folder = "../Tests", $maxsize = 50000) {
 		//$zipper = new zipper();
  
         // use assertEquals to ensure the greeting is what you
@@ -47,7 +47,7 @@ class zipperTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals($actual, $actual);
 	}
 	
-	public function testremove_directory($directory) {
+	public function testremove_directory($directory = "../Tests") {
 		//$zipper = new zipper();
  
         // use assertEquals to ensure the greeting is what you
@@ -56,7 +56,7 @@ class zipperTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals($actual, $actual);
 	}
 
-	public function testmake_zip($album_download_directory) {
+	public function testmake_zip($album_download_directory = "../Tests") {
 		//$zipper = new zipper();
  
         // use assertEquals to ensure the greeting is what you
@@ -66,7 +66,7 @@ class zipperTest extends PHPUnit_Framework_TestCase {
 	}
 
 
-	public function testget_zip( $album_download_directory ) {
+	public function testget_zip( $album_download_directory  = "../Tests" ) {
 		//echo "make_git";
  
         // use assertEquals to ensure the greeting is what you
