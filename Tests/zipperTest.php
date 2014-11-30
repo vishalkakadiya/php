@@ -14,28 +14,23 @@ class zipperTest extends PHPUnit_Framework_TestCase {
 		$this->zipper = new zipper();
     }
 
-	public function testLoadZipFiles($source = "../Tests") {
+	public function testLoadZipFiles( $source = null ) {
 
 		//$zipper = new zipper();
  
         // use assertEquals to ensure the greeting is what you
         //$expected = "Hello world!"; //$a;
-        $actual = $this->zipper->LoadZipFiles($source);
-        $this->assertEquals($actual, $actual);
+        $actual = $this->zipper->LoadZipFiles( $source );
+        //$this->assertEquals($actual, $actual);
 	}
 
-	public function testProcessZip($foldercontent = null, $folder = "../Tests", $maxsize = 50000) {
+	public function testProcessZip( $foldercontent = null, $folder = null, $maxsize = 50000 ) {
 		//$zipper = new zipper();
  
         // use assertEquals to ensure the greeting is what you
         //$expected = "Hello world!"; // Array;
-        $actual = $this->zipper->ProcessZip($foldercontent, $folder, $maxsize);
-        $this->assertEquals($actual, $actual);
-
-		/*return array(
-			'splits' => count($split),
-			'foldername' => ''
-		);*/
+        $actual = $this->zipper->ProcessZip( $foldercontent, $folder, $maxsize );
+        //$this->assertEquals($actual, $actual);
 	}
 
 	public function testgetMemoryLimit() {
@@ -44,38 +39,39 @@ class zipperTest extends PHPUnit_Framework_TestCase {
         // use assertEquals to ensure the greeting is what you
         //$expected = "Hello world!"; // return $memory_limit;
         $actual = $this->zipper->getMemoryLimit();
-        $this->assertEquals($actual, $actual);
+        //$this->assertEquals( $actual, $actual );
 	}
 	
-	public function testremove_directory($directory = "../Tests") {
+	public function testremove_directory( $album_download_directory = null ) {
 		//$zipper = new zipper();
  
         // use assertEquals to ensure the greeting is what you
         //$expected = "";
-        $actual = $this->zipper->remove_directory($directory);
-        $this->assertEquals($actual, $actual);
+        $actual = $this->zipper->remove_directory( $album_download_directory );
+        //$this->assertEquals( $actual, $actual );
 	}
 
-	public function testmake_zip($album_download_directory = "../Tests") {
+	public function testmake_zip( $album_download_directory = null ) {
 		//$zipper = new zipper();
  
         // use assertEquals to ensure the greeting is what you
         //$expected = ""; // return $zipfilename;
-        $actual = $this->zipper->make_zip($album_download_directory);
-        $this->assertEquals($actual, $actual);
+        $actual = $this->zipper->make_zip( $album_download_directory );
+        //$this->assertEquals( $actual, $actual );
 	}
 
 
-	public function testget_zip( $album_download_directory  = "../Tests" ) {
+	public function testget_zip( $album_download_directory = null ) {
 		//echo "make_git";
  
         // use assertEquals to ensure the greeting is what you
         //$expected = ""; // return $response;
         $actual = $this->zipper->get_zip($album_download_directory);
-        $this->assertEquals($actual, $actual);
+        //$this->assertEquals( $actual, $actual );
 	}
 
 	protected function tearDown() {
+		$this->assertEquals( $actual, $actual );
         unset($this->zipper);
     }
 
