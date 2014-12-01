@@ -61,68 +61,69 @@ class zipper {
 		$t = 0;
 
 		// Determine how many zip files to create
-
-		foreach ($foldercontent as $entry) {
-
-			$t = $t + $entry['size'];
-
-			if ($entry['type'] == 'dir') {
-				$lastdir = $entry;
-			}
-
-			if ($t >= $maxsize) {
-				$splits++;
-				$t = 0;
-				// create lastdir in next archive, in case files still exist
-				// even if the next file is not in this archive it doesn't hurt
-				if ($lastdir !== '') {
-					$split[$splits][] = $lastdir;
+		if ( isset( $foldercontent ) ) {
+			foreach ($foldercontent as $entry) {
+	
+				$t = $t + $entry['size'];
+	
+				if ($entry['type'] == 'dir') {
+					$lastdir = $entry;
 				}
-			}
-
-			$split[$splits][] = $entry;
-		}
-
-
-		// delete the $foldercontent array
-		unset($foldercontent);
-
-		// Create the folder to put the zip files in
-		$date = new DateTime();
-		$tS = $date->format('YmdHis');
-
-
-		// Process the splits
-		foreach ($split as $idx => $sp) {
-			
-			// create the zip file
-
-			$zip = new ZipArchive();
-
-			$destination = $folder . '.zip';
-
-			if (!$zip->open($destination, ZIPARCHIVE::CREATE)) {
-				return false;
-			}
-
-			$i = 1;
-			foreach ($sp as $entry) {
-				if ($entry['type'] === 'dir') {
-					$dir = explode('\\', $entry['file']);
-					$zip->addEmptyDir(end($dir));
-				} else {
-					$zip->addFromString(end($dir).'/'.$i.'.jpg', file_get_contents($entry['file']));
-					$i++;
+	
+				if ($t >= $maxsize) {
+					$splits++;
+					$t = 0;
+					// create lastdir in next archive, in case files still exist
+					// even if the next file is not in this archive it doesn't hurt
+					if ($lastdir !== '') {
+						$split[$splits][] = $lastdir;
+					}
 				}
+	
+				$split[$splits][] = $entry;
 			}
-
-			$zip->close();
+	
+	
+			// delete the $foldercontent array
+			unset($foldercontent);
+	
+			// Create the folder to put the zip files in
+			$date = new DateTime();
+			$tS = $date->format('YmdHis');
+	
+	
+			// Process the splits
+			foreach ($split as $idx => $sp) {
+				
+				// create the zip file
+	
+				$zip = new ZipArchive();
+	
+				$destination = $folder . '.zip';
+	
+				if (!$zip->open($destination, ZIPARCHIVE::CREATE)) {
+					return false;
+				}
+	
+				$i = 1;
+				foreach ($sp as $entry) {
+					if ($entry['type'] === 'dir') {
+						$dir = explode('\\', $entry['file']);
+						$zip->addEmptyDir(end($dir));
+					} else {
+						$zip->addFromString(end($dir).'/'.$i.'.jpg', file_get_contents($entry['file']));
+						$i++;
+					}
+				}
+	
+				$zip->close();
+			}
+	
+			return array(
+				'splits' => count($split),
+				'foldername' => ''
+			);
 		}
-
-		return array(
-			'splits' => count($split),
-			'foldername' => ''
-		);
 	}
 
 	public function getMemoryLimit() {
