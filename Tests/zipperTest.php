@@ -27,25 +27,25 @@ class zipperTest extends PHPUnit_Framework_TestCase {
     public function testgetMemoryLimit() {
         //$expected = "Hello world!"; // return $memory_limit;
         $actual = $this->zipper->getMemoryLimit();
-        $this->assertEquals($actual, $actual);
+        $this->assertEquals( $actual, $actual );
     }
 
-    public function testremove_directory($album_download_directory = "../Tests") {
+    public function testremove_directory( $album_download_directory = null ) {
         //$expected = "";
-        $actual = $this->zipper->remove_directory($album_download_directory);
-        $this->assertEquals($actual, $actual);
+        $actual = $this->zipper->remove_directory( $album_download_directory );
+        $this->assertEquals( $actual, $actual );
     }
 
-    public function testmake_zip($album_download_directory = "../Tests") {
+    public function testmake_zip( $album_download_directory = null ) {
         //$expected = ""; // return $zipfilename;
-        $actual = $this->zipper->make_zip($album_download_directory);
-        $this->assertEquals($actual, $actual);
+        $actual = $this->zipper->make_zip( $album_download_directory );
+        $this->assertEquals( $actual, $actual );
     }
 
-    public function testget_zip($album_download_directory = "../Tests") {
+    public function testget_zip( $album_download_directory = null ) {
         //$expected = ""; // return $response;
-        $actual = $this->zipper->get_zip($album_download_directory);
-        $this->assertEquals($actual, $actual);
+        $actual = $this->zipper->get_zip( $album_download_directory );
+        $this->assertEquals( $actual, $actual );
     }
 
     protected function tearDown() {
