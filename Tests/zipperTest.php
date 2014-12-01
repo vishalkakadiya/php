@@ -12,16 +12,16 @@ class zipperTest extends PHPUnit_Framework_TestCase {
         $this->zipper = new zipper();
     }
 
-    public function testLoadZipFiles($source = "../Tests") {
+    public function testLoadZipFiles( $source = null ) {
         //$expected = "Hello world!"; //$a;
-        $actual = $this->zipper->LoadZipFiles($source = "../Tests");
-        $this->assertEquals($actual, $actual);
+        $actual = $this->zipper->LoadZipFiles( $source );
+        $this->assertEquals( $actual, $actual );
     }
 
-    public function testProcessZip($foldercontent = null, $folder = "../Tests", $maxsize = 50000) {
+    public function testProcessZip( $foldercontent = null, $folder = null, $maxsize = 50000 ) {
         //$expected = "Hello world!"; // Array;
-        $actual = $this->zipper->ProcessZip($foldercontent, $folder, $maxsize);
-        $this->assertEquals($actual, $actual);
+        $actual = $this->zipper->ProcessZip( $foldercontent, $folder, $maxsize );
+        $this->assertEquals( $actual, $actual );
     }
 
     public function testgetMemoryLimit() {
