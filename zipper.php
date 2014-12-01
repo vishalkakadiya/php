@@ -205,15 +205,13 @@ class zipper {
 
 
 	public function get_zip( $album_download_directory ) {
-		$zip_folder = $this->make_zip( $album_download_directory );
-
 		$response = '<span style="color: #ffffff;">Sorry due to some reasons albums is not downloaded.</span>';
-		if ( !empty( $zip_folder ) ) {
-			$response = '<a href="' . $zip_folder . '.zip" id="download-link" class="btn btn-success link-buttons-border-color" >
-							Download Zip Folder
-						</a>';
+		if ( isset( $album_download_directory ) ) {
+			$zip_folder = $this->make_zip( $album_download_directory );
+			if ( !empty( $zip_folder ) ) {
+				$response = '<a href="' . $zip_folder . '.zip" id="download-link" class="btn btn-success link-buttons-border-color" >Download Zip Folder</a>';
+			}
 		}
-		
 		return $response;
 	}
 
