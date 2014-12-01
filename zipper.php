@@ -106,6 +106,7 @@ class zipper {
 				}
 	
 				$i = 1;
+				$dir = "";
 				foreach ($sp as $entry) {
 					if ($entry['type'] === 'dir') {
 						$dir = explode('\\', $entry['file']);
@@ -154,49 +155,51 @@ class zipper {
 	}
 
 	public function make_zip($album_download_directory) {
-		// Name of the zip file to create
-		//$zipfilename = 'libs/resources'.DIRECTORY_SEPARATOR.'albums'.DIRECTORY_SEPARATOR.'fb-album_'.date("Y-m-d").'_'.date("H-i-s");
-		$zipfilename = 'libs/resources/albums/fb-album_'.date("Y-m-d").'_'.date("H-i-s");
-
-		// name of folder starting from the root of the webserver
-		// as in Wordpress /wp-content/themes/ (end on backslash)
-
-
-		$folder = dirname($_SERVER['PHP_SELF']).'/'.$album_download_directory;
-
-		// Server Root
-		$root = $_SERVER["DOCUMENT_ROOT"];
-
-		// source of the folder to unpack
-		$sourcedir = $root . $folder; // target directory
-
-		// Don't use more than half the memory limit
-		$memory_limit = $this->getMemoryLimit();
-		$maxsize = $memory_limit / 2;
-
-		// Is zipping possible on the server ?
-		if (!extension_loaded('zip')) {
-			echo 'Zipping not possible on this server';
-			exit;
+		$zipfilename = "";
+		if ( isset( $album_download_directory) ) {
+			//$zipfilename = 'libs/resources'.DIRECTORY_SEPARATOR.'albums'.DIRECTORY_SEPARATOR.'fb-album_'.date("Y-m-d").'_'.date("H-i-s");
+			$zipfilename = 'libs/resources/albums/fb-album_'.date("Y-m-d").'_'.date("H-i-s");
+	
+			// name of folder starting from the root of the webserver
+			// as in Wordpress /wp-content/themes/ (end on backslash)
+	
+	
+			$folder = dirname($_SERVER['PHP_SELF']).'/'.$album_download_directory;
+	
+			// Server Root
+			$root = $_SERVER["DOCUMENT_ROOT"];
+	
+			// source of the folder to unpack
+			$sourcedir = $root . $folder; // target directory
+	
+			// Don't use more than half the memory limit
+			$memory_limit = $this->getMemoryLimit();
+			$maxsize = $memory_limit / 2;
+	
+			// Is zipping possible on the server ?
+			if (!extension_loaded('zip')) {
+				echo 'Zipping not possible on this server';
+				exit;
+			}
+	
+			// Get the files to zip
+			$foldercontent = $this->LoadZipFiles($sourcedir);
+			if ($foldercontent === false) {
+				echo 'Something went wrong gathering the file entries';
+				exit;
+			}
+	
+			// Process the files to zip
+			$zip = $this->ProcessZip($foldercontent, $zipfilename, $maxsize);
+			if ($zip === false) {
+				echo 'Something went wrong zipping the files';
+			}    
+	
+			// clear the stat cache (created by filesize command)
+			clearstatcache();
+			
+			$this->remove_directory($album_download_directory);
 		}
-
-		// Get the files to zip
-		$foldercontent = $this->LoadZipFiles($sourcedir);
-		if ($foldercontent === false) {
-			echo 'Something went wrong gathering the file entries';
-			exit;
-		}
-
-		// Process the files to zip
-		$zip = $this->ProcessZip($foldercontent, $zipfilename, $maxsize);
-		if ($zip === false) {
-			echo 'Something went wrong zipping the files';
-		}    
-
-		// clear the stat cache (created by filesize command)
-		clearstatcache();
-		
-		$this->remove_directory($album_download_directory);
 		return $zipfilename;
 	}
 
